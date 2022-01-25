@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/image"
         android:layout_width="match_parent"
-        android:layout_height="480dp" />
-
-    <Button
-        android:id="@+id/select_photo_from_gallery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select photo from gallery" />
-
-    <Button
-        android:id="@+id/take_picture_with_camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Take picture with camera" />
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:src="@drawable/ic_click"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="2dp"
+        tools:ignore="MissingClass" />
 
 </LinearLayout>

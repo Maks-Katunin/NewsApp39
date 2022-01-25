@@ -1,13 +1,12 @@
 package com.geektech.newsapp39.ui.home;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.geektech.newsapp39.R;
 import com.geektech.newsapp39.databinding.ItemNewsBinding;
 import com.geektech.newsapp39.models.News;
 
@@ -17,10 +16,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     private ArrayList<News> newsList;
     private ItemNewsBinding binding;
+    private OnItemClick listener;
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setNewsList(ArrayList<News> newsList) {
         this.newsList = newsList;
         notifyDataSetChanged();
+    }
+
+    public void setListener(OnItemClick listener) {
+        this.listener = listener;
     }
 
     public void setNews(News news) {
@@ -31,9 +36,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        /*View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news,
-                parent,
-                false);*/
         binding = ItemNewsBinding.inflate(LayoutInflater
                         .from(parent.getContext()), parent,
                 false);
@@ -59,7 +61,22 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         public void onBind(News news) {
             binding.titleTv.setText(news.getTitle());
             binding.dateTv.setText(String.valueOf(news.getCreateAd()));
-
+            initListeners(news);
         }
+
+        private void initListeners(News news) {
+            binding.getRoot().setOnClickListener(v -> listener.onClick(news));
+
+            binding.getRoot().setOnLongClickListener(v -> {
+                listener.onLongClick(getAdapterPosition());
+                return true;
+            });
+        }
+    }
+
+    interface OnItemClick {
+        void onClick(News news);
+        void onLongClick(int position);
+
     }
 }

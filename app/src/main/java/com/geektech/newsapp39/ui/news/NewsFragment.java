@@ -37,12 +37,7 @@ public class NewsFragment extends Fragment {
     }
 
     private void saveNews() {
-        binding.btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                save();
-            }
-        });
+        binding.btnSave.setOnClickListener(v -> save());
     }
 
     private void save() {
